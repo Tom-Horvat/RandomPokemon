@@ -1,0 +1,20 @@
+package io.bitbot.bemusedbaboon.adapter
+
+import io.bitbot.bemusedbaboon.domain.Pokemon
+import com.squareup.moshi.FromJson
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.ToJson
+
+/**
+ * A JSON adapter for the [Pokemon] to be used with [Moshi].
+ */
+class PokemonJsonAdapter(moshi: Moshi) {
+    private val adapter: JsonAdapter<Pokemon> = moshi.adapter(Pokemon::class.java)
+
+    @ToJson
+    fun toString(pokemon: Pokemon): String = adapter.toJson(pokemon)
+
+    @FromJson
+    fun parseJson(json: String?): Pokemon? = json?.let { adapter.fromJson(json) }
+}
