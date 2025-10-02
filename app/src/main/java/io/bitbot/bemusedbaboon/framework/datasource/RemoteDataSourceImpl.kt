@@ -1,9 +1,8 @@
 package io.bitbot.bemusedbaboon.framework.datasource
 
-import io.bitbot.bemusedbaboon.data.PokemonDataSource
+import io.bitbot.bemusedbaboon.data.repository.PokemonDataSource
 import io.bitbot.bemusedbaboon.domain.PokeIndex
 import io.bitbot.bemusedbaboon.domain.Pokemon
-import io.bitbot.bemusedbaboon.data.database.PokemonDto
 import io.bitbot.bemusedbaboon.framework.PokemonApi
 import kotlinx.coroutines.flow.*
 
@@ -16,7 +15,7 @@ class RemoteDataSourceImpl(
     private val api: PokemonApi,
 ) : PokemonDataSource {
     /**
-     * Gets a [PokemonDto] from the API, creates a [Flow] and emits a [Pokemon] converted from the
+     * Gets a PokemonDtoOld from the API, creates a [Flow] and emits a [Pokemon] converted from the
      * DTO
      */
     override suspend fun getPokemon(fromCache: Boolean, pokemonId: Int): Flow<Pokemon> = flow {

@@ -24,3 +24,4 @@ dependencyResolutionManagement {
 rootProject.name = "RandomPokemon"
 include(":app")
 include(":core")
+include(":common")

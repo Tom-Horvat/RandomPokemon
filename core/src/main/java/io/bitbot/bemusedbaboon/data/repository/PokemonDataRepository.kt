@@ -1,4 +1,4 @@
-package io.bitbot.bemusedbaboon.data
+package io.bitbot.bemusedbaboon.data.repository
 
 import io.bitbot.bemusedbaboon.domain.PokeIndex
 import io.bitbot.bemusedbaboon.domain.Pokemon

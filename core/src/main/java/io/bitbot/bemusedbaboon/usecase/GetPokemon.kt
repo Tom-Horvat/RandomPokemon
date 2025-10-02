@@ -1,6 +1,6 @@
 package io.bitbot.bemusedbaboon.usecase
 
-import io.bitbot.bemusedbaboon.data.PokemonDataSource
+import io.bitbot.bemusedbaboon.data.repository.PokemonDataSource
 
 /**
  * A use case for getting a pokemon.

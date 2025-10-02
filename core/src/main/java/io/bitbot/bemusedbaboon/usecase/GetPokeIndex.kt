@@ -1,6 +1,6 @@
 package io.bitbot.bemusedbaboon.usecase
 
-import io.bitbot.bemusedbaboon.data.PokemonDataSource
+import io.bitbot.bemusedbaboon.data.repository.PokemonDataSource
 import io.bitbot.bemusedbaboon.domain.PokeIndex
 import kotlinx.coroutines.flow.Flow
 

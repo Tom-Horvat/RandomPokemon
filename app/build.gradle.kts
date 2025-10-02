@@ -55,6 +55,7 @@ android {
 
 dependencies {
     implementation(project(":core"))
+    implementation(project(":common"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -72,9 +73,11 @@ dependencies {
     implementation(libs.timber)
 
     implementation(libs.moshi)
+
     implementation(libs.room)
     ksp(libs.room.ksp)
     implementation(libs.room.ktx)
+
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.moshi)
     implementation(libs.coil.compose)

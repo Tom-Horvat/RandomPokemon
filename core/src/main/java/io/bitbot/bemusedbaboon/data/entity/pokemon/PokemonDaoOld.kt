@@ -1,4 +1,4 @@
-package io.bitbot.bemusedbaboon.data.database
+package io.bitbot.bemusedbaboon.data.entity.pokemon
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -9,7 +9,7 @@ import androidx.room.Query
  * A DAO for accessing the local Pokemon database
  */
 @Dao
-interface PokemonDao {
+interface PokemonDaoOld {
     /**
      * Inserts a pokemon into the database
      */

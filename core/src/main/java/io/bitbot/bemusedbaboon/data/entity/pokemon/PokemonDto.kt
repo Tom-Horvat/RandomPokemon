@@ -1,4 +1,4 @@
-package io.bitbot.bemusedbaboon.data.database
+package io.bitbot.bemusedbaboon.data.entity.pokemon
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
