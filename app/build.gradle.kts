@@ -56,6 +56,8 @@ android {
 dependencies {
     implementation(project(":core"))
     implementation(project(":common"))
+    implementation(project(":navigation"))
+    implementation(project(":landing"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

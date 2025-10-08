@@ -1,4 +1,4 @@
-package io.bitbot.bemusedbaboon.usecase
+package io.bitbot.bemusedbaboon.domain.usecase
 
 import io.bitbot.bemusedbaboon.data.repository.PokemonDataSource
 import io.bitbot.bemusedbaboon.domain.Pokemon

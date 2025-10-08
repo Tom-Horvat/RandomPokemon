@@ -6,10 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.bitbot.bemusedbaboon.domain.PokeIndex
 import io.bitbot.bemusedbaboon.domain.Pokemon
-import io.bitbot.bemusedbaboon.usecase.CachePokeIndex
-import io.bitbot.bemusedbaboon.usecase.CachePokemon
-import io.bitbot.bemusedbaboon.usecase.GetPokeIndex
-import io.bitbot.bemusedbaboon.usecase.GetPokemon
+import io.bitbot.bemusedbaboon.domain.usecase.CachePokeIndex
+import io.bitbot.bemusedbaboon.domain.usecase.CachePokemon
+import io.bitbot.bemusedbaboon.domain.usecase.GetPokeIndex
+import io.bitbot.bemusedbaboon.domain.usecase.GetPokemon
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch

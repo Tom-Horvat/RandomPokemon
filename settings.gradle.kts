@@ -25,3 +25,5 @@ rootProject.name = "RandomPokemon"
 include(":app")
 include(":core")
 include(":common")
+include(":navigation")
+include(":landing")

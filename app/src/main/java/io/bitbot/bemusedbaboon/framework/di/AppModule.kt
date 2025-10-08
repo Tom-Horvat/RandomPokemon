@@ -13,10 +13,10 @@ import io.bitbot.bemusedbaboon.framework.provider.provideOkHttp
 import io.bitbot.bemusedbaboon.framework.provider.providePokemonApi
 import io.bitbot.bemusedbaboon.framework.provider.provideRetrofit
 import io.bitbot.bemusedbaboon.ui.viewmodel.PokemonViewModel
-import io.bitbot.bemusedbaboon.usecase.CachePokeIndex
-import io.bitbot.bemusedbaboon.usecase.CachePokemon
-import io.bitbot.bemusedbaboon.usecase.GetPokeIndex
-import io.bitbot.bemusedbaboon.usecase.GetPokemon
+import io.bitbot.bemusedbaboon.domain.usecase.CachePokeIndex
+import io.bitbot.bemusedbaboon.domain.usecase.CachePokemon
+import io.bitbot.bemusedbaboon.domain.usecase.GetPokeIndex
+import io.bitbot.bemusedbaboon.domain.usecase.GetPokemon
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
