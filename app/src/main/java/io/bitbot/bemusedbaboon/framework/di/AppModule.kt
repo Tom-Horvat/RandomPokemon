@@ -4,6 +4,10 @@ import io.bitbot.bemusedbaboon.adapter.PokeIndexJasonAdapter
 import io.bitbot.bemusedbaboon.adapter.PokemonJsonAdapter
 import io.bitbot.bemusedbaboon.data.repository.PokemonDataRepository
 import io.bitbot.bemusedbaboon.data.repository.PokemonDataSource
+import io.bitbot.bemusedbaboon.domain.usecase.CachePokeIndex
+import io.bitbot.bemusedbaboon.domain.usecase.CachePokemon
+import io.bitbot.bemusedbaboon.domain.usecase.GetPokeIndex
+import io.bitbot.bemusedbaboon.domain.usecase.GetPokemon
 import io.bitbot.bemusedbaboon.framework.PrefsCache
 import io.bitbot.bemusedbaboon.framework.datasource.LocalDataSourceImpl
 import io.bitbot.bemusedbaboon.framework.datasource.RemoteDataSourceImpl
@@ -12,12 +16,6 @@ import io.bitbot.bemusedbaboon.framework.provider.provideMoshi
 import io.bitbot.bemusedbaboon.framework.provider.provideOkHttp
 import io.bitbot.bemusedbaboon.framework.provider.providePokemonApi
 import io.bitbot.bemusedbaboon.framework.provider.provideRetrofit
-import io.bitbot.bemusedbaboon.ui.viewmodel.PokemonViewModel
-import io.bitbot.bemusedbaboon.domain.usecase.CachePokeIndex
-import io.bitbot.bemusedbaboon.domain.usecase.CachePokemon
-import io.bitbot.bemusedbaboon.domain.usecase.GetPokeIndex
-import io.bitbot.bemusedbaboon.domain.usecase.GetPokemon
-import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
 /**
@@ -61,15 +59,6 @@ val appModule = module {
         PrefsManager(
             context = get(),
             adapter = get(),
-        )
-    }
-
-    viewModel {
-        PokemonViewModel(
-            getPokemon = get(),
-            cachePokemon = get(),
-            getPokeIndex = get(),
-            cachePokeIndex = get(),
         )
     }
 }
