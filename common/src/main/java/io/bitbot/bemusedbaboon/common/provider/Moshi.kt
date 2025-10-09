@@ -1,4 +1,4 @@
-package io.bitbot.bemusedbaboon.framework.provider
+package io.bitbot.bemusedbaboon.common.provider
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

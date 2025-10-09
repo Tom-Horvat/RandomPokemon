@@ -1,6 +1,6 @@
-package io.bitbot.bemusedbaboon.framework.provider
+package io.bitbot.bemusedbaboon.common.provider
 
-import io.bitbot.bemusedbaboon.framework.PokemonApi
+import io.bitbot.bemusedbaboon.common.api.PokemonApi
 import retrofit2.Retrofit
 
 /**

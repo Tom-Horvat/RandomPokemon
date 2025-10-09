@@ -4,6 +4,6 @@ import io.bitbot.bemusedbaboon.landing.home.HomeViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
-val landingModule = module {
+val landing = module {
     viewModel { HomeViewModel() }
 }

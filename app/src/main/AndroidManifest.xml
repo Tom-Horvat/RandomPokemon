@@ -10,7 +10,7 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name="io.bitbot.bemusedbaboon.framework.RandomPokemonApp"
+        android:name="io.bitbot.bemusedbaboon.RandomPokemonApp"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RandomPokemon">

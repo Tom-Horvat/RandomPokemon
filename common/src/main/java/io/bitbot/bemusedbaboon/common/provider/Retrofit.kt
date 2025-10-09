@@ -1,7 +1,7 @@
-package io.bitbot.bemusedbaboon.framework.provider
+package io.bitbot.bemusedbaboon.common.provider
 
 import com.squareup.moshi.Moshi
-import io.bitbot.bemusedbaboon.BuildConfig
+import io.bitbot.bemusedbaboon.commons.BuildConfig
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory

@@ -1,4 +1,4 @@
-package io.bitbot.bemusedbaboon.framework.provider
+package io.bitbot.bemusedbaboon.common.provider
 
 import okhttp3.OkHttpClient
 

@@ -7,8 +7,6 @@ plugins {
     alias(libs.plugins.ksp)
 }
 
-val API_URL = "https://pokeapi.co/api/v2/"
-
 android {
     namespace = "io.bitbot.bemusedbaboon"
     compileSdk = 36
@@ -27,7 +25,6 @@ android {
         debug {
             isDebuggable = true
             applicationIdSuffix = ".debug"
-            buildConfigField("String", "API_URL", "\"$API_URL\"")
         }
         release {
             isDebuggable = false
@@ -73,8 +70,6 @@ dependencies {
     implementation(libs.koin.compose)
     implementation(libs.voyager.navigator)
     implementation(libs.timber)
-
-    implementation(libs.moshi)
 
     implementation(libs.room)
     ksp(libs.room.ksp)

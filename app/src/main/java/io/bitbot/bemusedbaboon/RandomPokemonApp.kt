@@ -1,11 +1,10 @@
-package io.bitbot.bemusedbaboon.framework
+package io.bitbot.bemusedbaboon
 
 import android.app.Application
 import cafe.adriel.voyager.core.registry.ScreenRegistry
-import io.bitbot.bemusedbaboon.BuildConfig
-import io.bitbot.bemusedbaboon.common.di.commonModule
-import io.bitbot.bemusedbaboon.framework.di.appModule
-import io.bitbot.bemusedbaboon.landing.framework.landingModule
+import io.bitbot.bemusedbaboon.common.framework.common
+import io.bitbot.bemusedbaboon.framework.di.app
+import io.bitbot.bemusedbaboon.landing.framework.landing
 import io.bitbot.bemusedbaboon.landing.framework.landingNav
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -17,16 +16,16 @@ class RandomPokemonApp : Application() {
         super.onCreate()
 
         if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
+            Timber.Forest.plant(Timber.DebugTree())
         }
 
         startKoin {
             androidLogger()
             androidContext(this@RandomPokemonApp)
             modules(
-                appModule,
-                commonModule,
-                landingModule,
+                app,
+                common,
+                landing,
             )
         }
 
