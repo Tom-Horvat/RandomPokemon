@@ -8,14 +8,18 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.navigator.Navigator
-import io.bitbot.bemusedbaboon.domain.usecase.GetPokemonCount
-import io.bitbot.bemusedbaboon.domain.usecase.UseCaseState
+import io.bitbot.bemusedbaboon.core.data.entity.index.Index
+import io.bitbot.bemusedbaboon.core.domain.usecase.index.GetPokemonCount
+import io.bitbot.bemusedbaboon.core.domain.usecase.index.GetPokemonIndex
 import io.bitbot.bemusedbaboon.navigation.landing.LandingScreen
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
+import timber.log.Timber
 
 class MainActivity : ComponentActivity() {
     private val getPokemonCount: GetPokemonCount by inject()
+    private val getPokemonIndex: GetPokemonIndex by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashscreen = installSplashScreen()
@@ -25,18 +29,32 @@ class MainActivity : ComponentActivity() {
 
         splashscreen.setKeepOnScreenCondition { showSplashScreen }
 
-        lifecycleScope.launch {
-            getPokemonCount.state.collect {
-                when (it) {
-                    is UseCaseState.Done<*> -> showSplashScreen = false
-                    is UseCaseState.Error<*> -> showSplashScreen = false
-                    is UseCaseState.Running -> {}
-                    null -> {}
+        lifecycleScope.launch(Dispatchers.Default) {
+            getPokemonCount.state.collect { useCase ->
+                useCase?.parse<Any, Int>(
+                    onError = { e ->
+                        Timber.e(e)
+                        showSplashScreen = false
+                    }
+                ) { data ->
+                    data?.let {
+                        getPokemonIndex(data)
+                    } ?: run { showSplashScreen = false }
+                }
+            }
+        }
+        lifecycleScope.launch(Dispatchers.IO) {
+            getPokemonIndex.state.collect { useCase ->
+                useCase?.parse<Int, List<Index>>(
+                    onError = { e -> Timber.e(e) }
+                ) {
+                    Timber.i("Index from use case has %d items", it?.size)
+                    showSplashScreen = false
                 }
             }
         }
         lifecycleScope.launch {
-            getPokemonCount.invoke()
+            getPokemonCount()
         }
 
         enableEdgeToEdge()

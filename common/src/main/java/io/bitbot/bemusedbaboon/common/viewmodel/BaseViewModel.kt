@@ -3,7 +3,7 @@ package io.bitbot.bemusedbaboon.common.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.bitbot.bemusedbaboon.common.view.BaseView
-import io.bitbot.bemusedbaboon.domain.usecase.UseCase
+import io.bitbot.bemusedbaboon.core.domain.usecase.UseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
@@ -65,15 +65,15 @@ open class BaseViewModel<M, VM>(
      */
     protected inline fun <reified O> UseCase<O>.observe(
         crossinline onRunning: () -> Unit = {},
-        crossinline onError: (Throwable?, Any?) -> Unit = { error, input ->
-            onUseCaseError(input, error)
+        crossinline onError: (Throwable?) -> Unit = { error ->
+            onUseCaseError(error)
         },
         crossinline onDone: suspend (O?) -> Unit = {}
     ) = viewModelScope.launch {
         this@observe.state.collect {
             it?.let {
-                it.parseUseCase<Any?, O>(
-                    onError = { e, i -> onError(e, i) },
+                it.parse<Any?, O>(
+                    onError = { e -> onError(e) },
                     onRunning = { onRunning() },
                 ) { result -> onDone(result) }
             }
@@ -91,11 +91,11 @@ open class BaseViewModel<M, VM>(
     ) = viewModelScope.launch {
         this@observe
             .debounce(timeoutMillis = debounceMillis)
-            .catch { e -> onUseCaseError(null, e) }
+            .catch { e -> onUseCaseError(e) }
             .collect { it?.let { callback(it) } }
     }
 
-    protected fun <T> onUseCaseError(input: T, error: Throwable?) {
-        Timber.e("ERROR: %s for INPUT: %s", error?.message, "$input")
+    protected fun onUseCaseError(error: Throwable?) {
+        Timber.e("ERROR: %s", error?.message)
     }
 }

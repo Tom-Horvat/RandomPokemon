@@ -7,3 +7,5 @@ data class PokemonIndexResponse(
     val count: Int,
     val results: List<PokemonNamedUrl>
 )
+
+fun List<PokemonNamedUrl>.toEntities() = map { it.toEntity() }

@@ -1,8 +1,9 @@
 package io.bitbot.bemusedbaboon.framework.di
 
-import io.bitbot.bemusedbaboon.common.manager.PokemonCountLocalRepoImpl
-import io.bitbot.bemusedbaboon.common.manager.PokemonCountRemoteRepoImpl
-import io.bitbot.bemusedbaboon.domain.usecase.GetPokemonCount
+import io.bitbot.bemusedbaboon.common.manager.PokemonIndexLocalRepoImpl
+import io.bitbot.bemusedbaboon.common.manager.PokemonIndexRemoteRepoImpl
+import io.bitbot.bemusedbaboon.core.domain.usecase.index.GetPokemonCount
+import io.bitbot.bemusedbaboon.core.domain.usecase.index.GetPokemonIndex
 import org.koin.dsl.module
 
 /**
@@ -11,8 +12,14 @@ import org.koin.dsl.module
 val app = module {
     single {
         GetPokemonCount(
-            local = get<PokemonCountLocalRepoImpl>(),
-            remote = get<PokemonCountRemoteRepoImpl>()
+            local = get<PokemonIndexLocalRepoImpl>(),
+            remote = get<PokemonIndexRemoteRepoImpl>()
+        )
+    }
+    single {
+        GetPokemonIndex(
+            local = get<PokemonIndexLocalRepoImpl>(),
+            remote = get<PokemonIndexRemoteRepoImpl>()
         )
     }
 }
