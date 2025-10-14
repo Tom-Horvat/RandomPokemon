@@ -38,12 +38,6 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-
-    implementation(libs.timber)
-
     implementation(libs.room)
     ksp(libs.room.ksp)
     implementation(libs.room.ktx)
