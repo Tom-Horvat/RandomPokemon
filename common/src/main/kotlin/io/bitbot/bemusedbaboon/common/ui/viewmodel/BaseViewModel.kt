@@ -18,10 +18,10 @@ import timber.log.Timber
 /**
  * Intended to be used by ViewModels to simplify state and use case management.
  *
- * @param state The initial state of the ViewModel.
+ * @property state The initial state of the ViewModel.
  *
- * @property state The observable state flow of the [ViewModelState] used by the Composables.
- * @property model A convenience property to obtain the current value of the [ViewModelState] used
+ * @param state The observable state flow of the [ViewModelState] used by the Composables.
+ * @param model A convenience property to obtain the current value of the [ViewModelState] used
  * for updating the state values.
  */
 open class BaseViewModel<M>(state: ViewModelState) : ViewModel() {
@@ -35,6 +35,10 @@ open class BaseViewModel<M>(state: ViewModelState) : ViewModel() {
 
     /**
      * Updates the base view model state.
+     *
+     * ```
+     * model.copy(someParam = someValue).save()
+     * ```
      */
     fun ViewModelState.save() {
         _state.update { this }
@@ -42,6 +46,10 @@ open class BaseViewModel<M>(state: ViewModelState) : ViewModel() {
 
     /**
      * Runs a list of use cases.
+     *
+     * ```
+     * runScoped({ someUsecase(), anotherUsecase(someValue) })
+     * ```
      */
     protected fun runScoped(
         vararg useCases: suspend () -> Unit,
@@ -54,19 +62,27 @@ open class BaseViewModel<M>(state: ViewModelState) : ViewModel() {
 
     /**
      * Observes the given [UseCase] and executes the given lambda.
+     *
+     * ```
+     * useCase.observe(
+     *             onRunning = { m -> /* Do something with the message */ },
+     *             onError = { e -> model.copy(error = e).save() }
+     *         ) { data -> /* Do something with the data */ }
+     * ```
      */
     protected inline fun <reified O> UseCase<O>.observe(
-        crossinline onRunning: () -> Unit = {},
-        crossinline onError: (Throwable?) -> Unit = { error ->
-            onUseCaseError(error)
-        },
+        crossinline onRunning: (String?) -> Unit = {},
+        crossinline onError: (Throwable?) -> Unit = { e -> onUseCaseError(e) },
         crossinline onDone: suspend (O?) -> Unit = {}
     ) = viewModelScope.launch {
         this@observe.state.collect {
             it?.let {
                 it.parse<O>(
-                    onError = { e -> onError(e) },
-                    onLoading = { onRunning() },
+                    onError = { e ->
+                        onError(e)
+                        //onUseCaseError(e)
+                    },
+                    onRunning = { m -> onRunning(m) },
                 ) { result -> onDone(result) }
             }
         }

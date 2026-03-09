@@ -8,32 +8,17 @@ import java.time.LocalDateTime
 @Entity(tableName = "Sprites")
 class Sprites(
     @PrimaryKey
-    override val pokemonId: Long,
+    val pokemonId: Long,
     @ColumnInfo(defaultValue = "CURRENT_TIMESTAMP")
-    override val createdAt: LocalDateTime = LocalDateTime.now(),
+    val createdAt: LocalDateTime = LocalDateTime.now(),
     @ColumnInfo(defaultValue = "CURRENT_TIMESTAMP")
-    override val updatedAt: LocalDateTime,
-    override val backDefault: String,
-    override val backFemale: String?,
-    override val backShiny: String,
-    override val backShinyFemale: String?,
-    override val frontDefault: String,
-    override val frontFemale: String?,
-    override val fronShiny: String,
-    override val frontShinyFemale: String?,
-) : Props {
-
-    data class Seed(
-        override val pokemonId: Long,
-        override val backDefault: String,
-        override val backFemale: String?,
-        override val backShiny: String,
-        override val backShinyFemale: String?,
-        override val frontDefault: String,
-        override val frontFemale: String?,
-        override val fronShiny: String,
-        override val frontShinyFemale: String?,
-        override val createdAt: LocalDateTime = LocalDateTime.now(),
-        override val updatedAt: LocalDateTime = LocalDateTime.now(),
-    ) : Props
-}
+    val updatedAt: LocalDateTime = LocalDateTime.now(),
+    val backDefault: String?,
+    val backFemale: String? = null,
+    val backShiny: String? = null,
+    val backShinyFemale: String? = null,
+    val frontDefault: String,
+    val frontFemale: String? = null,
+    val fronShiny: String? = null,
+    val frontShinyFemale: String? = null,
+)

@@ -5,7 +5,7 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class PokemonIndexResponse(
     val count: Int,
-    val results: List<PokemonNamedUrl>
+    val results: List<NamedUrl>
 )
 
-fun List<PokemonNamedUrl>.toEntities() = map { it.toEntity() }
+fun List<NamedUrl>.toEntities(endpoint: String) = map { it.toEntity(endpoint) }

@@ -15,13 +15,4 @@ class Stat(
     override val updatedAt: LocalDateTime,
     override val isBattleOnly: Boolean,
     override val name: String,
-) : Props {
-
-    data class Seed(
-        override val statId: Long,
-        override val createdAt: LocalDateTime = LocalDateTime.now(),
-        override val updatedAt: LocalDateTime = LocalDateTime.now(),
-        override val isBattleOnly: Boolean,
-        override val name: String,
-    ) : Props
-}
+) : Props

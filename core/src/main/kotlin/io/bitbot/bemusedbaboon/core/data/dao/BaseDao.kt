@@ -3,9 +3,9 @@ package io.bitbot.bemusedbaboon.core.data.dao
 import androidx.room.Delete
 import androidx.room.Update
 
-interface BaseDao<E, S> {
+interface BaseDao<E> {
 
-    fun insertSeed(seed: S): Long
+    fun insert(seed: E): Long
 
     fun getById(id: Long): E
 

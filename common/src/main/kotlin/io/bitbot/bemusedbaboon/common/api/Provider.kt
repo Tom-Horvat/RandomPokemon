@@ -4,10 +4,19 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import io.bitbot.bemusedbaboon.commons.BuildConfig
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-fun provideOkHttp(): OkHttpClient = OkHttpClient().newBuilder().build()
+fun provideOkHttp(): OkHttpClient = OkHttpClient()
+    .newBuilder()
+    .apply {
+        if (BuildConfig.DEBUG) addInterceptor(
+            HttpLoggingInterceptor().setLevel(
+                HttpLoggingInterceptor.Level.BODY
+            )
+        )
+    }.build()
 
 fun provideMoshi(): Moshi = Moshi.Builder()
     .addLast(KotlinJsonAdapterFactory())

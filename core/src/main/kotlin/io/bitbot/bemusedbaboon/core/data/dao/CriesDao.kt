@@ -6,11 +6,11 @@ import androidx.room.Query
 import io.bitbot.bemusedbaboon.core.data.entity.cries.Cries
 
 @Dao
-interface CryDao : BaseDao<Cries, Cries.Seed> {
+interface CriesDao : BaseDao<Cries> {
 
     @Insert(entity = Cries::class)
-    override fun insertSeed(seed: Cries.Seed): Long
+    override fun insert(seed: Cries): Long
 
-    @Query("SELECT * FROM Cry WHERE cryId IS :id")
+    @Query("SELECT * FROM Cries WHERE pokemonId IS :id")
     override fun getById(id: Long): Cries
 }

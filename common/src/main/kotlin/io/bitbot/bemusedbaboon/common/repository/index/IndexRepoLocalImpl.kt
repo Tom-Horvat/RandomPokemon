@@ -1,18 +1,19 @@
-package io.bitbot.bemusedbaboon.common.repository
+package io.bitbot.bemusedbaboon.common.repository.index
 
 import android.content.Context
+import io.bitbot.bemusedbaboon.common.repository.cacheDataStore
 import io.bitbot.bemusedbaboon.core.data.dao.IndexDao
 import io.bitbot.bemusedbaboon.core.data.entity.index.Index
+import io.bitbot.bemusedbaboon.core.data.repository.index.IndexRepo
 import io.bitbot.bemusedbaboon.core.domain.ResultStateFlowConverter
-import io.bitbot.bemusedbaboon.core.data.repository.pokemoncount.PokemonIndexRepoLocal
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
-class PokemonIndexLocalRepoImpl(
+class IndexRepoLocalImpl(
     private val context: Context,
     private val indexDao: IndexDao
 ) : ResultStateFlowConverter(),
-    PokemonIndexRepoLocal {
+    IndexRepo.Local {
 
     override suspend fun setPokemonCount(count: Int) = toResultStateFlow {
         context.cacheDataStore.updateData { current ->
@@ -37,5 +38,9 @@ class PokemonIndexLocalRepoImpl(
 
     override suspend fun getPokemonIndex(count: Int) = toResultStateFlow {
         indexDao.getAll()
+    }
+
+    override suspend fun getRandomIndex() = toResultStateFlow {
+        indexDao.getRandomIndex()
     }
 }

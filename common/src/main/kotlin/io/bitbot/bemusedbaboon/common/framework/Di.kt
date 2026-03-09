@@ -1,19 +1,24 @@
 package io.bitbot.bemusedbaboon.common.framework
 
-import io.bitbot.bemusedbaboon.common.repository.provideDatabase
-import io.bitbot.bemusedbaboon.common.repository.PokemonIndexLocalRepoImpl
-import io.bitbot.bemusedbaboon.common.repository.PokemonIndexRemoteRepoImpl
 import io.bitbot.bemusedbaboon.common.api.provideMoshi
 import io.bitbot.bemusedbaboon.common.api.provideOkHttp
 import io.bitbot.bemusedbaboon.common.api.providePokemonApi
 import io.bitbot.bemusedbaboon.common.api.provideRetrofit
+import io.bitbot.bemusedbaboon.common.repository.index.IndexRepoImpl
+import io.bitbot.bemusedbaboon.common.repository.index.IndexRepoLocalImpl
+import io.bitbot.bemusedbaboon.common.repository.pokemon.PokemonRepoImpl
+import io.bitbot.bemusedbaboon.common.repository.pokemon.PokemonRepoLocalImpl
+import io.bitbot.bemusedbaboon.common.repository.provideDatabase
 import io.bitbot.bemusedbaboon.core.data.PokemonDatabase
+import io.bitbot.bemusedbaboon.core.data.repository.index.IndexRepo
+import io.bitbot.bemusedbaboon.core.data.repository.pokemon.PokemonRepo
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 val common = module {
     single { provideDatabase(androidContext()) }
     single { get<PokemonDatabase>().abilityDao() }
+    single { get<PokemonDatabase>().abilitySlotDao() }
     single { get<PokemonDatabase>().cryDao() }
     single { get<PokemonDatabase>().moveDao() }
     single { get<PokemonDatabase>().speciesDao() }
@@ -25,13 +30,22 @@ val common = module {
     single { get<PokemonDatabase>().pokemonDao() }
     single { get<PokemonDatabase>().indexDao() }
 
-    single {
-        PokemonIndexLocalRepoImpl(
+    single<IndexRepo.Local> {
+        IndexRepoLocalImpl(
             context = androidContext(),
             indexDao = get()
         )
     }
-    single { PokemonIndexRemoteRepoImpl(api = get()) }
+    single<IndexRepo> { IndexRepoImpl(api = get()) }
+    single<PokemonRepo> { PokemonRepoImpl(api = get()) }
+    single<PokemonRepo.Local> {
+        PokemonRepoLocalImpl(
+            pokemonDao = get(),
+            criesDao = get(),
+            spritesDao = get(),
+            abilitySlotDao = get(),
+        )
+    }
 
     factory { provideMoshi() }
     factory { provideOkHttp() }

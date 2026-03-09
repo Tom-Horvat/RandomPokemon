@@ -28,19 +28,19 @@ sealed class ResultState {
     /**
      * Parses the [ResultState] and runs the given lambdas for each result state type.
      *
-     * @param onLoading Execute while loading, provides a message if any.
+     * @param onRunning Execute while loading, provides a message if any.
      * @param onError Execute on received error.
      * @param onComplete Execute on operation completed. Validates that the passed data is of the correct type.
      *
      * @throws IllegalArgumentException when the data type does not match the expected one.
      */
     inline fun <reified O> parse(
-        onLoading: (String?) -> Unit = {},
+        onRunning: (String?) -> Unit = {},
         onError: (Throwable?) -> Unit = {},
         onComplete: (O?) -> Unit = {},
     ) {
         when (this) {
-            is Running -> onLoading(this.message)
+            is Running -> onRunning(this.message)
             is Error -> onError(this.error)
             is Complete<*> -> this.data?.let {
                 it.takeIf { it is O }?.let { result -> onComplete(result as O?) }

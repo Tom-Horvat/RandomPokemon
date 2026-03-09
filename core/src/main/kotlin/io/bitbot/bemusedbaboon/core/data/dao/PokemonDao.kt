@@ -7,10 +7,10 @@ import androidx.room.Transaction
 import io.bitbot.bemusedbaboon.core.data.entity.pokemon.Pokemon
 
 @Dao
-interface PokemonDao : BaseDao<Pokemon, Pokemon.Seed> {
+interface PokemonDao : BaseDao<Pokemon> {
 
     @Insert(entity = Pokemon::class)
-    override fun insertSeed(seed: Pokemon.Seed): Long
+    override fun insert(seed: Pokemon): Long
 
     @Query("SELECT * FROM Pokemon WHERE pokemonId IS :id")
     override fun getById(id: Long): Pokemon

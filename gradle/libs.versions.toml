@@ -1,5 +1,5 @@
 [versions]
-agp = "8.13.0"
+agp = "8.13.2"
 kotlin = "2.2.20"
 coreKtx = "1.17.0"
 junit = "4.13.2"
@@ -15,16 +15,17 @@ koin = "4.1.1"
 voyager = "1.1.0-beta03"
 timber = "5.0.1"
 mockk = "1.14.6"
-kotest = "6.0.3"
+kotest = "6.0.4"
 coil = "3.3.0"
 splashscreen = "1.0.1"
 moshi = "1.15.2"
 room = "2.8.2"
 ksp = "2.2.20-2.0.2"
 retrofit = "3.0.0"
+httpLogging = "5.2.1"
 datastore = "1.1.7"
 protobuf = "0.9.5"
-protobuf-javalite = "4.32.1"
+protobuf-javalite = "4.33.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -43,7 +44,6 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-material-icons = { group = "androidx.compose.material", name = "material-icons-extended-android" }
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
 coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
 koin = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
@@ -61,10 +61,11 @@ room = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-ksp = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "httpLogging" }
 retrofit-converter-moshi = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "retrofit" }
 datastore = { group = "androidx.datastore", name = "datastore", version.ref = "datastore" }
-protobuf-javalite = { group="com.google.protobuf", name = "protobuf-javalite", version.ref = "protobuf-javalite"}
-protobuf-kotlinlite = { group="com.google.protobuf", name = "protobuf-kotlin-lite", version.ref = "protobuf-javalite"}
+protobuf-javalite = { group = "com.google.protobuf", name = "protobuf-javalite", version.ref = "protobuf-javalite" }
+protobuf-kotlinlite = { group = "com.google.protobuf", name = "protobuf-kotlin-lite", version.ref = "protobuf-javalite" }
 
 
 [plugins]

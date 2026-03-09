@@ -59,6 +59,9 @@ dependencies {
 
     implementation(libs.voyager.navigator)
 
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -6,10 +6,10 @@ import androidx.room.Query
 import io.bitbot.bemusedbaboon.core.data.entity.stat.Stat
 
 @Dao
-interface StatDao : BaseDao<Stat, Stat.Seed> {
+interface StatDao : BaseDao<Stat> {
 
     @Insert(entity = Stat::class)
-    override fun insertSeed(seed: Stat.Seed): Long
+    override fun insert(seed: Stat): Long
 
     @Query("SELECT * FROM Stat WHERE statId IS :id")
     override fun getById(id: Long): Stat

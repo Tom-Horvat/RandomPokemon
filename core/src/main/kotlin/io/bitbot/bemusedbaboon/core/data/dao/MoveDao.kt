@@ -6,10 +6,10 @@ import androidx.room.Query
 import io.bitbot.bemusedbaboon.core.data.entity.move.Move
 
 @Dao
-interface MoveDao : BaseDao<Move, Move.Seed> {
+interface MoveDao : BaseDao<Move> {
 
     @Insert(entity = Move::class)
-    override fun insertSeed(seed: Move.Seed): Long
+    override fun insert(seed: Move): Long
 
     @Query("SELECT * FROM Move WHERE moveId IS :id")
     override fun getById(id: Long): Move

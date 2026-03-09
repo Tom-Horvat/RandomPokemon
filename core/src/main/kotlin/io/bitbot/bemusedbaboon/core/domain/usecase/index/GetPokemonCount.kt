@@ -1,7 +1,6 @@
 package io.bitbot.bemusedbaboon.core.domain.usecase.index
 
-import io.bitbot.bemusedbaboon.core.data.repository.pokemoncount.PokemonIndexRepo
-import io.bitbot.bemusedbaboon.core.data.repository.pokemoncount.PokemonIndexRepoLocal
+import io.bitbot.bemusedbaboon.core.data.repository.index.IndexRepo
 import io.bitbot.bemusedbaboon.core.domain.usecase.UseCase
 
 /**
@@ -15,8 +14,8 @@ import io.bitbot.bemusedbaboon.core.domain.usecase.UseCase
  * @param remote An instance of a remote repository.
  */
 class GetPokemonCount(
-    private val local: PokemonIndexRepoLocal,
-    private val remote: PokemonIndexRepo
+    private val local: IndexRepo.Local,
+    private val remote: IndexRepo
 ) : UseCase<Int>() {
 
     /**
