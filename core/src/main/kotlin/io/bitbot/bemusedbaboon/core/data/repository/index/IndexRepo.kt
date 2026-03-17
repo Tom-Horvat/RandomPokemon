@@ -5,13 +5,15 @@ import io.bitbot.bemusedbaboon.core.domain.ResultState
 import kotlinx.coroutines.flow.Flow
 
 interface IndexRepo {
-    suspend fun getPokemonCount(): Flow<ResultState>
-    suspend fun getPokemonIndex(count: Int = 0): Flow<ResultState>
+    fun getPokemonIndex(count: Int = 0): Flow<ResultState>
+    fun getPokemonCount(): Flow<ResultState>
+
+    interface Remote : IndexRepo
 
     interface Local : IndexRepo {
-        suspend fun setPokemonCount(count: Int): Flow<ResultState>
-        suspend fun setPokemonIndex(items: List<Index>): Flow<ResultState>
-        suspend fun getPokemonIndexCount(): Flow<ResultState>
-        suspend fun getRandomIndex(): Flow<ResultState>
+        fun getPokemonIndexCount(): Flow<ResultState>
+        fun getRandomIndex(): Flow<ResultState>
+        suspend fun setPokemonCount(count: Int)
+        suspend fun setPokemonIndex(items: List<Index>)
     }
 }

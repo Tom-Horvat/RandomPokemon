@@ -2,10 +2,9 @@ package io.bitbot.bemusedbaboon
 
 import android.app.Application
 import cafe.adriel.voyager.core.registry.ScreenRegistry
-import io.bitbot.bemusedbaboon.common.framework.common
+import io.bitbot.bemusedbaboon.common.framework.di.common
 import io.bitbot.bemusedbaboon.framework.di.app
-import io.bitbot.bemusedbaboon.landing.framework.landing
-import io.bitbot.bemusedbaboon.landing.framework.landingNav
+import io.bitbot.bemusedbaboon.landing.framework.navigation.landingNav
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -25,7 +24,6 @@ class RandomPokemonApp : Application() {
             modules(
                 app,
                 common,
-                landing,
             )
         }
 

@@ -5,8 +5,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import cafe.adriel.voyager.core.screen.Screen
+import io.bitbot.bemusedbaboon.common.ui.theme.RandomPokemonTheme
 import io.bitbot.bemusedbaboon.common.ui.view.RootView
-import io.bitbot.bemusedbaboon.landing.home.state.HomeState
+import io.bitbot.bemusedbaboon.landing.home.event.HomeEvent
 import io.bitbot.bemusedbaboon.landing.home.ui.HomeView
 import org.koin.androidx.compose.koinViewModel
 
@@ -18,8 +19,12 @@ class HomeScreen : Screen {
         val view = HomeView()
         val state by viewModel.state.collectAsState()
 
-        RootView() {
-            view.body(state as HomeState, viewModel)
+        val eventHandler = { event: HomeEvent -> viewModel.onEvent(event) }
+
+        RandomPokemonTheme {
+            RootView() {
+                view.body(state)
+            }
         }
     }
 }

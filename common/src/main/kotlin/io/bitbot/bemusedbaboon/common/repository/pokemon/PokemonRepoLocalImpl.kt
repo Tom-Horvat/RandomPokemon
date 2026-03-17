@@ -17,24 +17,24 @@ class PokemonRepoLocalImpl(
     private val spritesDao: SpritesDao,
     private val abilitySlotDao: AbilitySlotDao,
 ) : ResultStateFlowConverter(), PokemonRepo.Local {
-    override suspend fun savePokemon(seed: Pokemon) = toResultStateFlow {
+    override suspend fun savePokemon(seed: Pokemon) {
         pokemonDao.insert(seed = seed)
     }
 
-    override suspend fun saveCries(seed: Cries) = toResultStateFlow {
+    override suspend fun saveCries(seed: Cries) {
         criesDao.insert(seed)
     }
 
-    override suspend fun saveSprites(seed: Sprites) = toResultStateFlow {
+    override suspend fun saveSprites(seed: Sprites) {
         spritesDao.insert(seed)
     }
 
-    override suspend fun saveAbilities(seeds: List<AbilitySlot>) = toResultStateFlow {
+    override suspend fun saveAbilities(seeds: List<AbilitySlot>) {
         if (seeds.isNotEmpty()) abilitySlotDao.insertAll(seeds)
         else emptyList()
     }
 
-    override suspend fun getPokemonById(id: Long) = toResultStateFlow {
+    override fun getPokemonById(id: Long) = toResultStateFlow {
         pokemonDao.getCompleteById(id)
     }
 }

@@ -23,7 +23,7 @@ import io.bitbot.bemusedbaboon.common.ui.view.RootView
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PopUpDialog(
-    title: @Composable (() -> Unit)? = null,
+    title: String? = null,
     onDismiss: () -> Unit,
     onOk: (() -> Unit)? = null,
     content: @Composable () -> Unit
@@ -39,7 +39,7 @@ fun PopUpDialog(
             tonalElevation = AlertDialogDefaults.TonalElevation
         ) {
             Column(modifier = Modifier.padding(16.dp)) {
-                title?.let { it() }
+                title?.let { StandardTitle(text = title) }
                 content()
                 Spacer(modifier = Modifier.height(24.dp))
                 onOk?.let {
@@ -61,7 +61,7 @@ fun PopUpDialog(
 fun PopUpDialogPreview() {
     RootView {
         PopUpDialog(
-            title = { StandardTitle(text = "Title") },
+            title = "Title",
             onDismiss = {},
             onOk = {}
         ) {

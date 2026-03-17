@@ -3,7 +3,7 @@ package io.bitbot.bemusedbaboon.common.api.response
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import io.bitbot.bemusedbaboon.core.data.entity.pokemon.Pokemon
-import io.bitbot.bemusedbaboon.core.data.entity.pokemon.PokemonDto
+import io.bitbot.bemusedbaboon.common.api.data.PokemonDto
 
 @JsonClass(generateAdapter = true)
 data class PokemonResponse(

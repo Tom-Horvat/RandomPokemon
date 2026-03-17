@@ -8,12 +8,14 @@ import io.bitbot.bemusedbaboon.core.domain.ResultState
 import kotlinx.coroutines.flow.Flow
 
 interface PokemonRepo {
-    suspend fun getPokemonById(id: Long): Flow<ResultState>
+    fun getPokemonById(id: Long): Flow<ResultState>
+
+    interface Remote : PokemonRepo
 
     interface Local : PokemonRepo {
-        suspend fun savePokemon(seed: Pokemon): Flow<ResultState>
-        suspend fun saveCries(seed: Cries): Flow<ResultState>
-        suspend fun saveSprites(seed: Sprites): Flow<ResultState>
-        suspend fun saveAbilities(seeds: List<AbilitySlot>): Flow<ResultState>
+        suspend fun savePokemon(seed: Pokemon)
+        suspend fun saveCries(seed: Cries)
+        suspend fun saveSprites(seed: Sprites)
+        suspend fun saveAbilities(seeds: List<AbilitySlot>)
     }
 }

@@ -1,43 +1,60 @@
 package io.bitbot.bemusedbaboon.landing.home
 
 import io.bitbot.bemusedbaboon.common.ui.viewmodel.BaseViewModel
-import io.bitbot.bemusedbaboon.core.domain.usecase.index.GetPokemon
+import io.bitbot.bemusedbaboon.core.domain.usecase.index.GetPokemonCount
 import io.bitbot.bemusedbaboon.core.domain.usecase.index.GetPokemonIndex
 import io.bitbot.bemusedbaboon.core.domain.usecase.index.GetRandomIndex
+import io.bitbot.bemusedbaboon.core.domain.usecase.pokemon.GetPokemon
+import io.bitbot.bemusedbaboon.landing.home.event.HomeEvent
 import io.bitbot.bemusedbaboon.landing.home.state.HomeState
-import kotlinx.coroutines.flow.MutableStateFlow
-import timber.log.Timber
 
 class HomeViewModel(
     getPokemonIndex: GetPokemonIndex,
+    getPokemonCount: GetPokemonCount,
     private val getRandomIndex: GetRandomIndex,
     private val getPokemon: GetPokemon,
-) : BaseViewModel<HomeState>(state = HomeState()) {
-    private val randomIndex: MutableStateFlow<Long?> = MutableStateFlow(null)
+) : BaseViewModel<HomeState>(initialState = HomeState()) {
 
     init {
-        getPokemonIndex.observe { if (!it.isNullOrEmpty()) runScoped({ getRandomIndex() }) }
+        getPokemonCount.collectUseCase {
+            it?.let { runScoped({ getPokemonIndex(it) }) }
+        }
+        getPokemonIndex.collectUseCase(
+            onError = { error ->
+                updateState { it.copy(error = error) }
+                onUseCaseError(error)
+            }
+        ) { runScoped({ getRandomIndex() }) }
 
-        getRandomIndex.observe(onError = { model.copy(error = it).save() }) { index ->
-            index?.let { randomIndex.value = it } ?: run { Timber.i("No random index fetched") }
+        getRandomIndex.collectUseCase(
+            onError = { error -> updateState { it.copy(error = error) } }
+        ) { index ->
+            index?.let { if (it > 0) runScoped({ getPokemon(index) }) }
         }
 
-        getPokemon.observe(
-            onRunning = { m -> Timber.i(m) },
-            onError = {
-                model.copy(error = it).save()
-                onUseCaseError(it)
+        getPokemon.collectUseCase(
+            onError = { error ->
+                updateState { it.copy(error = error) }
+                onUseCaseError(error)
             }
         ) { pokemon ->
-            Timber.i("Pokemon: $pokemon")
             pokemon?.let {
-                model.copy(
-                    name = pokemon.pokemon.name,
-                    spriteUrl = pokemon.sprites.frontDefault
-                ).save()
+                updateState {
+                    it.copy(
+                        name = pokemon.pokemon.name,
+                        spriteUrl = pokemon.sprites.frontDefault
+                    )
+                }
+
             }
         }
-
-        randomIndex.observe { it?.let { runScoped({ getPokemon(it) }) } }
     }
+
+
+    fun onEvent(event: HomeEvent) {
+        when (event) {
+            else -> {}
+        }
+    }
+
 }
