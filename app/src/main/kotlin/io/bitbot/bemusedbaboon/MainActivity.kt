@@ -26,8 +26,6 @@ class MainActivity : ComponentActivity() {
 
         super.onCreate(savedInstanceState)
 
-        enableEdgeToEdge()
-
         splashscreen.setKeepOnScreenCondition { showSplashScreen }
         lifecycleScope.launch(Dispatchers.IO) {
             getPokemonCount.state.collect { state ->
@@ -41,6 +39,7 @@ class MainActivity : ComponentActivity() {
             getPokemonCount()
         }
 
+        enableEdgeToEdge()
         setContent {
             val startScreen = rememberScreen(provider = LandingScreen.Home)
 

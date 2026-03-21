@@ -23,7 +23,7 @@ class HomeScreen : Screen {
 
         RandomPokemonTheme {
             RootView() {
-                view.body(state)
+                view.body(state, it)
             }
         }
     }

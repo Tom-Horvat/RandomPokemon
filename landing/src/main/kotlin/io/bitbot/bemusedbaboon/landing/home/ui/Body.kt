@@ -1,6 +1,7 @@
 package io.bitbot.bemusedbaboon.landing.home.ui
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,13 +17,14 @@ import coil3.compose.AsyncImage
 
 @Composable
 fun Body(
+    padding: PaddingValues,
     name: String,
     spriteUrl: String? = null
 ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(padding)
     ) {
         Card {
             Row(
@@ -47,6 +49,7 @@ fun Body(
 @Composable
 fun BodyPreview() {
     Body(
+        padding = PaddingValues(16.dp),
         name = "Bulbasaur",
         spriteUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/1.png"
     )
