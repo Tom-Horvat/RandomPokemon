@@ -34,10 +34,5 @@ gradlePlugin {
             id = "randompokemon.android.room"
             implementationClass = "RandomPokemonAndroidRoomConventionPlugin"
         }
-
-        register("randompokemon.kotlin.android") {
-            id = "randompokemon.kotlin.android"
-            implementationClass = "KotlinAndroidConventionPlugin"
-        }
     }
 }

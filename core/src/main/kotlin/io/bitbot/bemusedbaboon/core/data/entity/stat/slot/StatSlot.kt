@@ -14,30 +14,16 @@ import java.time.LocalDateTime
 @Entity(tableName = "StatSlot")
 class StatSlot(
     @PrimaryKey
-    override val statSlotId: Long,
+    val statSlotId: Long,
     @ColumnInfo(defaultValue = "CURRENT_TIMESTAMP")
-    override val createdAt: LocalDateTime = LocalDateTime.now(),
+    val createdAt: LocalDateTime = LocalDateTime.now(),
     @ColumnInfo(defaultValue = "CURRENT_TIMESTAMP")
-    override val updatedAt: LocalDateTime,
-    override val baseStat: Int,
-    override val effort: Int,
-    override val statId: Long,
-    override val pokemonId: Long
-) : Props {
-
-    /**
-     * PersonalStat seed, used for creating database entries through the PersonalStatDto.
-     **/
-    data class Seed(
-        override val statSlotId: Long,
-        override val createdAt: LocalDateTime = LocalDateTime.now(),
-        override val updatedAt: LocalDateTime = LocalDateTime.now(),
-        override val baseStat: Int,
-        override val effort: Int,
-        override val statId: Long,
-        override val pokemonId: Long,
-    ) : Props
-
+    val updatedAt: LocalDateTime,
+    val baseStat: Int,
+    val effort: Int,
+    val statId: Long,
+    val pokemonId: Long
+) {
     data class Complete(
         @Embedded val statSlot: StatSlot,
         @Relation(

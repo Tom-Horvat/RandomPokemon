@@ -1,6 +1,5 @@
 plugins {
     id("randompokemon.android.application")
-    id("randompokemon.kotlin.android")
     id("randompokemon.android.compose")
 }
 

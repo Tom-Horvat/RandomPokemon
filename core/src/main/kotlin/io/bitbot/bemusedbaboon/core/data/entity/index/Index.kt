@@ -6,6 +6,6 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "Index")
 data class Index(
     @PrimaryKey
-    override val pokemonId: Long,
-    override val name: String,
-) : Props
+    val pokemonId: Long,
+    val name: String,
+)

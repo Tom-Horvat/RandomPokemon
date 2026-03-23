@@ -15,11 +15,10 @@ class RandomPokemonAndroidApplicationConventionPlugin : Plugin<Project> {
             val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
 
             extensions.configure<BaseAppModuleExtension> {
+                configureKotlinAndroid(this)
                 namespace = "io.bitbot.bemusedbaboon"
-                compileSdk = 36
                 defaultConfig {
                     applicationId = "io.bitbot.bemusedbaboon"
-                    minSdk = 31
                     targetSdk = 36
                     versionCode = 1
                     versionName = "2.0.0-alpha"

@@ -3,7 +3,6 @@ import com.google.protobuf.gradle.id
 plugins {
     id("randompokemon.android.library")
     id("randompokemon.android.compose")
-    id("randompokemon.kotlin.android")
     id("randompokemon.android.room")
     alias(libs.plugins.protobuf)
 }

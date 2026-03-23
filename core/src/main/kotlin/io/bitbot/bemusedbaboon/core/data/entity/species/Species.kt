@@ -8,20 +8,11 @@ import java.time.LocalDateTime
 @Entity(tableName = "Species")
 class Species(
     @PrimaryKey(autoGenerate = true)
-    override val speciesId: Int,
+    val speciesId: Int,
     @ColumnInfo(defaultValue = "CURRENT_TIMESTAMP")
-    override val createdAt: LocalDateTime = LocalDateTime.now(),
+    val createdAt: LocalDateTime = LocalDateTime.now(),
     @ColumnInfo(defaultValue = "CURRENT_TIMESTAMP")
-    override val updatedAt: LocalDateTime,
-    override val name: String,
-    override val pokemonId: Long
-) : Props {
-
-    data class Seed(
-        override val speciesId: Int,
-        override val createdAt: LocalDateTime = LocalDateTime.now(),
-        override val updatedAt: LocalDateTime = LocalDateTime.now(),
-        override val name: String,
-        override val pokemonId: Long,
-    ) : Props
-}
+    val updatedAt: LocalDateTime,
+    val name: String,
+    val pokemonId: Long
+)

@@ -8,11 +8,11 @@ import java.time.LocalDateTime
 @Entity(tableName = "Stat")
 class Stat(
     @PrimaryKey
-    override val statId: Long,
+    val statId: Long,
     @ColumnInfo(defaultValue = "CURRENT_TIMESTAMP")
-    override val createdAt: LocalDateTime = LocalDateTime.now(),
+    val createdAt: LocalDateTime = LocalDateTime.now(),
     @ColumnInfo(defaultValue = "CURRENT_TIMESTAMP")
-    override val updatedAt: LocalDateTime,
-    override val isBattleOnly: Boolean,
-    override val name: String,
-) : Props
+    val updatedAt: LocalDateTime,
+    val isBattleOnly: Boolean,
+    val name: String,
+)
