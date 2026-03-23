@@ -22,6 +22,7 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "RandomPokemon"
+includeBuild("build-logic")
 include(":app")
 include(":core")
 include(":common")

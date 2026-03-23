@@ -3,16 +3,11 @@ package io.bitbot.bemusedbaboon.core.data.entity.pokemon
 import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
-import androidx.room.Junction
 import androidx.room.PrimaryKey
 import androidx.room.Relation
-import io.bitbot.bemusedbaboon.core.data.entity.ability.Ability
+import io.bitbot.bemusedbaboon.core.data.entity.ability.slot.AbilitySlot
 import io.bitbot.bemusedbaboon.core.data.entity.cries.Cries
-import io.bitbot.bemusedbaboon.core.data.entity.move.Move
-import io.bitbot.bemusedbaboon.core.data.entity.species.Species
 import io.bitbot.bemusedbaboon.core.data.entity.sprites.Sprites
-import io.bitbot.bemusedbaboon.core.data.entity.stat.slot.StatSlot
-import io.bitbot.bemusedbaboon.core.data.entity.type.slot.TypeSlot
 import java.time.LocalDateTime
 
 /**
@@ -21,37 +16,20 @@ import java.time.LocalDateTime
 @Entity(tableName = "Pokemon")
 data class Pokemon(
     @PrimaryKey
-    override val pokemonId: Long,
+    val pokemonId: Long,
     @ColumnInfo(defaultValue = "CURRENT_TIMESTAMP")
-    override val createdAt: LocalDateTime = LocalDateTime.now(),
+    val createdAt: LocalDateTime = LocalDateTime.now(),
     @ColumnInfo(defaultValue = "CURRENT_TIMESTAMP")
-    override val updatedAt: LocalDateTime,
-    override val baseExperience: Int,
-    override val height: Int,
-    override val name: String,
-    override val locationEncounters: String,
-    override val weight: Int,
-) : Props {
-
-    data class Seed(
-        override val pokemonId: Long,
-        override val createdAt: LocalDateTime = LocalDateTime.now(),
-        override val updatedAt: LocalDateTime = LocalDateTime.now(),
-        override val baseExperience: Int,
-        override val height: Int,
-        override val name: String,
-        override val locationEncounters: String,
-        override val weight: Int,
-    ) : Props
+    val updatedAt: LocalDateTime = LocalDateTime.now(),
+    val baseExperience: Int,
+    val height: Int,
+    val name: String,
+    val locationEncounters: String,
+    val weight: Int,
+) {
 
     data class Complete(
         @Embedded val pokemon: Pokemon,
-        @Relation(
-            parentColumn = "pokemonId",
-            entityColumn = "abilityId",
-            associateBy = Junction(PokemonAbility::class)
-        )
-        val abilities: List<Ability>,
         @Relation(
             parentColumn = "pokemonId",
             entityColumn = "pokemonId",
@@ -59,31 +37,36 @@ data class Pokemon(
         val cries: Cries,
         @Relation(
             parentColumn = "pokemonId",
-            entityColumn = "moveId",
-            associateBy = Junction(PokemonMove::class)
+            entityColumn = "pokemonId",
         )
-        val moves: List<Move>,
-        @Relation(
-            parentColumn = "pokemonId",
-            entityColumn = "pokemonId"
-        )
-        val species: Species,
+        val abilitySlots: List<AbilitySlot>,
+//        @Relation(
+//            parentColumn = "pokemonId",
+//            entityColumn = "moveId",
+//            associateBy = Junction(PokemonMove::class)
+//        )
+//        val moves: List<Move>,
+//        @Relation(
+//            parentColumn = "pokemonId",
+//            entityColumn = "pokemonId"
+//        )
+//        val species: Species,
         @Relation(
             parentColumn = "pokemonId",
             entityColumn = "pokemonId"
         )
         val sprites: Sprites,
-        @Relation(
-            entity = StatSlot::class,
-            parentColumn = "pokemonId",
-            entityColumn = "pokemonId"
-        )
-        val stats: List<StatSlot.Complete>,
-        @Relation(
-            entity = TypeSlot::class,
-            parentColumn = "pokemonId",
-            entityColumn = "pokemonId"
-        )
-        val types: List<TypeSlot.Complete>
+//        @Relation(
+//            entity = StatSlot::class,
+//            parentColumn = "pokemonId",
+//            entityColumn = "pokemonId"
+//        )
+//        val stats: List<StatSlot.Complete>,
+//        @Relation(
+//            entity = TypeSlot::class,
+//            parentColumn = "pokemonId",
+//            entityColumn = "pokemonId"
+//        )
+//        val types: List<TypeSlot.Complete>
     )
 }

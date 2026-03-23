@@ -6,10 +6,10 @@ import androidx.room.Query
 import io.bitbot.bemusedbaboon.core.data.entity.index.Index
 
 @Dao
-interface IndexDao : BaseDao<Index, Index> {
+interface IndexDao : BaseDao<Index> {
 
     @Insert(entity = Index::class)
-    override fun insertSeed(seed: Index): Long
+    override fun insert(seed: Index): Long
 
     @Insert(entity = Index::class)
     fun insertAll(items: List<Index>): List<Long>
@@ -22,4 +22,7 @@ interface IndexDao : BaseDao<Index, Index> {
 
     @Query("SELECT COUNT() FROM `Index`")
     fun getIndexCount(): Int
+
+    @Query("SELECT pokemonId FROM `Index` ORDER BY RANDOM() LIMIT 1")
+    fun getRandomIndex(): Long
 }

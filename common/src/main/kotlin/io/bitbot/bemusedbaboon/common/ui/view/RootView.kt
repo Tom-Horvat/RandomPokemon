@@ -46,7 +46,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.bitbot.bemusedbaboon.common.ui.view.components.PopUpDialog
-import io.bitbot.bemusedbaboon.common.ui.view.components.StandardTitle
 import io.bitbot.bemusedbaboon.common.ui.view.components.TitledBottomSheet
 import kotlinx.coroutines.launch
 
@@ -60,7 +59,8 @@ fun RootView(
     bottomSheet: @Composable () -> Unit = {},
     showBottomSheet: Boolean = false,
     onBottomSheetDismissed: () -> Unit = {},
-    popUpDialog: Dialog? = null,
+    popUpDialog: @Composable (() -> Unit)? = null,
+
     content: @Composable (PaddingValues) -> Unit
 ) {
     val drawerState = rememberDrawerState(initialValue = drawerValue)
@@ -100,13 +100,7 @@ fun RootView(
                         sheetState = sheetState
                     ) { bottomSheet() }
 
-                popUpDialog?.let {
-                    PopUpDialog(
-                        onOk = it.onOk,
-                        onDismiss = it.onDismiss,
-                        title = it.title
-                    ) { it.content() }
-                }
+                popUpDialog?.let { it() }
             }
         }
     }
@@ -343,15 +337,13 @@ private fun RootViewBottomBarContent() {
 @Composable
 fun RootViewWithDialog() {
     RootView(
-        popUpDialog = object : Dialog {
-            override val title: @Composable (() -> Unit) = {
-                StandardTitle(text = "Some title")
-            }
-            override val onDismiss = {}
-            override val onOk = {}
-            override val content: @Composable (() -> Unit) = {
-                Text("Some text")
-            }
+        popUpDialog = {
+            PopUpDialog(
+                title = "Some title",
+                onDismiss = {},
+                onOk = {},
+                content = { Text("Some text") }
+            )
         }
     ) {
         Box(modifier = Modifier.fillMaxSize()) {

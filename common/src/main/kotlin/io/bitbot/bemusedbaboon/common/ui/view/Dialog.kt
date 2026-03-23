@@ -1,11 +1,9 @@
 package io.bitbot.bemusedbaboon.common.ui.view
 
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 
+@Immutable
 interface Dialog {
-    val title: @Composable (() -> Unit)?
-        get() = null
-    val onDismiss: () -> Unit
-    val onOk: (() -> Unit)?
-    val content: @Composable () -> Unit
+    val title: String
+    val content: String
 }

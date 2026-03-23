@@ -7,10 +7,10 @@ import androidx.room.Transaction
 import io.bitbot.bemusedbaboon.core.data.entity.type.slot.TypeSlot
 
 @Dao
-interface TypeSlotDao : BaseDao<TypeSlot, TypeSlot.Seed> {
+interface TypeSlotDao : BaseDao<TypeSlot> {
 
     @Insert(entity = TypeSlot::class)
-    override fun insertSeed(seed: TypeSlot.Seed): Long
+    override fun insert(seed: TypeSlot): Long
 
     @Query("SELECT * FROM TypeSlot WHERE typeSlotId IS :id")
     override fun getById(id: Long): TypeSlot
