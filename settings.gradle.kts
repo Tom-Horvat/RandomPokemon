@@ -25,6 +25,6 @@ rootProject.name = "RandomPokemon"
 includeBuild("build-logic")
 include(":app")
 include(":core")
-include(":common")
+include(":commons")
 include(":navigation")
 include(":landing")

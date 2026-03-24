@@ -9,20 +9,15 @@ plugins {
 
 val apiUrl = "https://pokeapi.co/api/v2/"
 
-android {
-    namespace = "io.bitbot.bemusedbaboon.commons"
+libraryNamespace("commons")
 
+android {
     buildTypes {
         debug {
             buildConfigField("String", "API_URL", "\"$apiUrl\"")
         }
         release {
             buildConfigField("String", "API_URL", "\"$apiUrl\"")
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
         }
     }
     buildFeatures {

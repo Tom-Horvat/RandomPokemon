@@ -15,7 +15,6 @@ import io.bitbot.bemusedbaboon.navigation.landing.LandingScreen
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
-import timber.log.Timber
 
 class MainActivity : ComponentActivity() {
     private val getPokemonCount: GetPokemonCount by inject()
@@ -29,7 +28,7 @@ class MainActivity : ComponentActivity() {
         splashscreen.setKeepOnScreenCondition { showSplashScreen }
         lifecycleScope.launch(Dispatchers.IO) {
             getPokemonCount.state.collect { state ->
-                state?.parse<Int>(onError = { Timber.e(it) }) {
+                state?.parse<Int> {
                     showSplashScreen = false
                 }
             }

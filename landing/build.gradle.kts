@@ -3,24 +3,12 @@ plugins {
     id("randompokemon.android.compose")
 }
 
-android {
-    namespace = "io.bitbot.bemusedbaboon.landing"
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-}
+libraryNamespace("landing")
 
 dependencies {
 
     implementation(project(":core"))
-    implementation(project(":common"))
+    implementation(project(":commons"))
     implementation(project(":navigation"))
 
     implementation(libs.timber)

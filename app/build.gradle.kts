@@ -5,9 +5,12 @@ plugins {
 
 dependencies {
     implementation(project(":core"))
-    implementation(project(":common"))
+    implementation(project(":commons"))
     implementation(project(":navigation"))
     implementation(project(":landing"))
+
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.splashscreen)
 
     implementation(libs.koin)
     implementation(libs.voyager.navigator)

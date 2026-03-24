@@ -2,27 +2,22 @@ plugins {
     `kotlin-dsl`
 }
 
-repositories {
-    google()
-    mavenCentral()
-}
-
 dependencies {
-    implementation("com.android.tools.build:gradle:${libs.versions.agp.get()}")
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:${libs.versions.kotlin.get()}")
-    implementation("androidx.room:room-gradle-plugin:${libs.versions.room.get()}")
+    compileOnly(libs.android.gradle)
+    compileOnly(libs.kotlin.gradle)
+    compileOnly(libs.room.gradle)
 }
 
 gradlePlugin {
     plugins {
-        register("randompokemon.android.library") {
-            id = "randompokemon.android.library"
-            implementationClass = "RandomPokemonAndroidLibraryConventionPlugin"
-        }
-
         register("randompokemon.android.application") {
             id = "randompokemon.android.application"
             implementationClass = "RandomPokemonAndroidApplicationConventionPlugin"
+        }
+
+        register("randompokemon.android.library") {
+            id = "randompokemon.android.library"
+            implementationClass = "RandomPokemonAndroidLibraryConventionPlugin"
         }
 
         register("randompokemon.android.compose") {
