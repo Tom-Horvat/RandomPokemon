@@ -20,8 +20,8 @@ class RandomPokemonAndroidRoomConventionPlugin : Plugin<Project> {
 
             dependencies {
                 "implementation"(libs.findLibrary("room").get())
-                "implementation"(libs.findLibrary("room.ktx").get())
-                "ksp"(libs.findLibrary("room.ksp").get())
+                "implementation"(libs.findLibrary("room-ktx").get())
+                "ksp"(libs.findLibrary("room-ksp").get())
             }
         }
     }

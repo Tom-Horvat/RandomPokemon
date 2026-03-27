@@ -1,3 +1,4 @@
+import com.android.build.api.dsl.LibraryExtension
 import com.google.protobuf.gradle.id
 
 plugins {
@@ -11,12 +12,12 @@ val apiUrl = "https://pokeapi.co/api/v2/"
 
 libraryNamespace("commons")
 
-android {
+configure<LibraryExtension> {
     buildTypes {
-        debug {
+        getByName("debug") {
             buildConfigField("String", "API_URL", "\"$apiUrl\"")
         }
-        release {
+        getByName("release") {
             buildConfigField("String", "API_URL", "\"$apiUrl\"")
         }
     }
