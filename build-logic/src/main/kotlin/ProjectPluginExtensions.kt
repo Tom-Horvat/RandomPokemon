@@ -9,15 +9,16 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 internal const val BASE_NAMESPACE = "io.bitbot.bemusedbaboon"
 
 internal fun Project.configureKotlinAndroid(
-    commonExtension: CommonExtension<*, *, *, *, *, *>,
+    commonExtension: CommonExtension,
 ) {
     commonExtension.apply {
         compileSdk = 36
-        defaultConfig {
+
+        defaultConfig.apply {
             minSdk = 31
         }
 
-        compileOptions {
+        compileOptions.apply {
             sourceCompatibility = JavaVersion.VERSION_21
             targetCompatibility = JavaVersion.VERSION_21
         }
@@ -30,7 +31,7 @@ internal fun Project.configureKotlinAndroid(
     }
 }
 
-fun Project.libraryNamespace(suffix: String){
+fun Project.libraryNamespace(suffix: String) {
     extensions.configure<LibraryExtension> {
         namespace = "$BASE_NAMESPACE.$suffix"
     }
